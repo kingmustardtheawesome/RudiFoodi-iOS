@@ -1,15 +1,27 @@
 import SwiftUI
+import UIKit
 import WebKit
 
 struct GameWebView: UIViewRepresentable {
+    private let gameURLString = "https://html-classic.itch.zone/html/18015598/index.html?v=1782655610"
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+
     func makeUIView(context: Context) -> WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
 
+        let contentController = WKUserContentController()
+        contentController.add(context.coordinator, name: Coordinator.hapticMessageName)
+        contentController.addUserScript(Coordinator.hapticClickScript)
+        configuration.userContentController = contentController
+
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.isOpaque = false
-        webView.backgroundColor = .clear
-        webView.scrollView.backgroundColor = .clear
+        webView.backgroundColor = .black
+        webView.scrollView.backgroundColor = .black
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.bounces = false
         webView.scrollView.contentInsetAdjustmentBehavior = .never
@@ -19,15 +31,47 @@ struct GameWebView: UIViewRepresentable {
 
     func updateUIView(_ webView: WKWebView, context: Context) {
         guard webView.url == nil,
-              let htmlURL = Bundle.main.url(
-                forResource: "Rudi Foodi!",
-                withExtension: "html",
-                subdirectory: "WebContent"
-              ) else {
+              let gameURL = URL(string: gameURLString) else {
             return
         }
 
-        let contentURL = htmlURL.deletingLastPathComponent()
-        webView.loadFileURL(htmlURL, allowingReadAccessTo: contentURL)
+        webView.load(URLRequest(url: gameURL))
+    }
+
+    static func dismantleUIView(_ webView: WKWebView, coordinator: Coordinator) {
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: Coordinator.hapticMessageName)
+    }
+
+    final class Coordinator: NSObject, WKScriptMessageHandler {
+        static let hapticMessageName = "rudiFoodiHaptic"
+
+        static let hapticClickScript = WKUserScript(
+            source: """
+            (() => {
+                if (window.__rudiFoodiHapticsInstalled) { return; }
+                window.__rudiFoodiHapticsInstalled = true;
+
+                const triggerHaptic = () => {
+                    window.webkit.messageHandlers.rudiFoodiHaptic.postMessage('click');
+                };
+
+                document.addEventListener('pointerdown', triggerHaptic, true);
+                document.addEventListener('click', triggerHaptic, true);
+            })();
+            """,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: false
+        )
+
+        private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+
+        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            guard message.name == Self.hapticMessageName else {
+                return
+            }
+
+            feedbackGenerator.prepare()
+            feedbackGenerator.impactOccurred()
+        }
     }
 }
