@@ -51,7 +51,12 @@ struct GameWebView: UIViewRepresentable {
                 if (window.__rudiFoodiHapticsInstalled) { return; }
                 window.__rudiFoodiHapticsInstalled = true;
 
+                let lastHapticTime = 0;
                 const triggerHaptic = () => {
+                    const now = Date.now();
+                    if (now - lastHapticTime < 80) { return; }
+
+                    lastHapticTime = now;
                     window.webkit.messageHandlers.rudiFoodiHaptic.postMessage('click');
                 };
 

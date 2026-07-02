@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		111111111111111111111111 /* RudiFoodiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222222222222222222222221 /* RudiFoodiApp.swift */; };
 		111111111111111111111112 /* GameWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222222222222222222222222 /* GameWebView.swift */; };
-		111111111111111111111113 /* WebContent in Resources */ = {isa = PBXBuildFile; fileRef = 222222222222222222222224 /* WebContent */; };
 		111111111111111111111114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 222222222222222222222225 /* LaunchScreen.storyboard */; };
+		E69AED872FF5E71100C9D7CA /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = E69AED862FF5E71100C9D7CA /* AppIcon.icon */; };
 		E6D3480E2FF2991A0011CC42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6D3480D2FF2991A0011CC42 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -19,8 +19,8 @@
 		222222222222222222222221 /* RudiFoodiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RudiFoodiApp.swift; sourceTree = "<group>"; };
 		222222222222222222222222 /* GameWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWebView.swift; sourceTree = "<group>"; };
 		222222222222222222222223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		222222222222222222222224 /* WebContent */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebContent; sourceTree = "<group>"; };
 		222222222222222222222225 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E69AED862FF5E71100C9D7CA /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		E6D3480D2FF2991A0011CC42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,8 +50,8 @@
 				222222222222222222222222 /* GameWebView.swift */,
 				222222222222222222222223 /* Info.plist */,
 				222222222222222222222225 /* LaunchScreen.storyboard */,
-				222222222222222222222224 /* WebContent */,
 				E6D3480D2FF2991A0011CC42 /* Assets.xcassets */,
+				E69AED862FF5E71100C9D7CA /* AppIcon.icon */,
 			);
 			path = RudiFoodi;
 			sourceTree = "<group>";
@@ -123,8 +123,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				111111111111111111111114 /* LaunchScreen.storyboard in Resources */,
+				E69AED872FF5E71100C9D7CA /* AppIcon.icon in Resources */,
 				E6D3480E2FF2991A0011CC42 /* Assets.xcassets in Resources */,
-				111111111111111111111113 /* WebContent in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,10 +268,12 @@
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=*]" = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = RudiFoodi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				INFOPLIST_KEY_CFBundleDisplayName = "Rudi Foodi";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.adventure-games";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,10 +298,12 @@
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=*]" = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = RudiFoodi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				INFOPLIST_KEY_CFBundleDisplayName = "Rudi Foodi";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.adventure-games";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
