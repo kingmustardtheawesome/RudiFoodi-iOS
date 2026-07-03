@@ -3,7 +3,9 @@ import UIKit
 import WebKit
 
 struct GameWebView: UIViewRepresentable {
-    private let gameURLString = "https://html-classic.itch.zone/html/18015598/index.html?v=1782655610"
+    private let bundledGameFileName = "Game"
+    private let bundledGameFileExtension = "html"
+    private let developmentGameURL = URL(fileURLWithPath: "/Users/kingmustard/Downloads/thisissoooooogoog.html")
 
     func makeCoordinator() -> Coordinator {
         Coordinator()
@@ -30,12 +32,16 @@ struct GameWebView: UIViewRepresentable {
     }
 
     func updateUIView(_ webView: WKWebView, context: Context) {
-        guard webView.url == nil,
-              let gameURL = URL(string: gameURLString) else {
+        guard webView.url == nil else {
             return
         }
 
-        webView.load(URLRequest(url: gameURL))
+        let gameURL = Bundle.main.url(
+            forResource: bundledGameFileName,
+            withExtension: bundledGameFileExtension
+        ) ?? developmentGameURL
+
+        webView.loadFileURL(gameURL, allowingReadAccessTo: gameURL.deletingLastPathComponent())
     }
 
     static func dismantleUIView(_ webView: WKWebView, coordinator: Coordinator) {
